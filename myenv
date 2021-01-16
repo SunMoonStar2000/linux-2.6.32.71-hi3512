@@ -1,8 +1,8 @@
 PATH=~/x-tools/arm-unknown-linux-gnueabi/bin:$PATH
 ARCH=arm
 CROSS_COMPILE=arm-unknown-linux-gnueabi-
-INSTALL_PATH=/scratchbox/users/lcy/targets/hi3512
-INSTALL_MOD_PATH=/scratchbox/users/lcy/targets/hi3512
+INSTALL_PATH=/scratchbox/users/XXX/targets/hi3512
+INSTALL_MOD_PATH=/scratchbox/users/XXX/targets/hi3512
 
 export PATH
 export ARCH
