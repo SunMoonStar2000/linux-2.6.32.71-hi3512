@@ -1,0 +1,254 @@
+Binary file ./built-in.o matches
+./ctrl.c:	if( !(up>down) || (up>ld->depth.hw_recvq))
+./ctrl.c:	hieth_assert( ld->depth.hw_xmitq>0 && ld->depth.hw_recvq>0 && 
+./ctrl.c:			(ld->depth.hw_xmitq + ld->depth.hw_recvq) <= HIETH_MAX_QUEUE_DEPTH);
+./ctrl.c:	if( (ld->depth.hw_xmitq + ld->depth.hw_recvq) > HIETH_MAX_QUEUE_DEPTH) {
+./ctrl.c:	hieth_writel_bits(ld, ld->depth.hw_xmitq, GLB_QUEUE_DEPTH, BITS_TXQ_DEP);
+./ctrl.c:	hieth_writel_bits(ld, ld->depth.hw_recvq, GLB_QUEUE_DEPTH, BITS_RXQ_DEP);
+./ctrl.c:	hil_vqueue_init(&ld->hwq_xmit, ld->depth.hw_xmitq);
+./ctrl.c:	hil_vqueue_init(&ld->hwq_recv, ld->depth.hw_recvq);
+./ctrl.c:	hil_vqueue_init(&ld->swq_xmit_pool, ld->depth.sw_xmit_pool);
+./ctrl.c:	hil_vqueue_init(&ld->swq_recv_ready, ld->depth.sw_recv_rbf);
+./ctrl.c:	hil_vqueue_init(&ld->swq_recv_blank, ld->depth.sw_recv_rbf);
+./ctrl.c:	hil_vqueue_init(&ld->swq_recv_free, ld->depth.sw_recv_rbf);
+./ctrl.c:	vqid = hil_vqueue_push_back(&ld->hwq_xmit);
+./ctrl.c:	vqid = hil_vqueue_push_back(&ld->swq_xmit_pool);
+./ctrl.c:	vqid = hil_vqueue_pop_front(&ld->swq_xmit_pool);
+./ctrl.c:	vqcnt = hil_vqueue_count(&ld->hwq_xmit);
+./ctrl.c:		int id = hil_vqueue_front(&ld->hwq_xmit);
+./ctrl.c:		hil_vqueue_pop_front(&ld->hwq_xmit);
+./ctrl.c:		freeid = hil_vqueue_front(&ld->swq_recv_free);
+./ctrl.c:					hil_vqueue_count(&ld->swq_recv_ready), 
+./ctrl.c:					hil_vqueue_count(&ld->swq_recv_blank),
+./ctrl.c:					hil_vqueue_count(&ld->hwq_recv));
+./ctrl.c:		vqid = hil_vqueue_back(&ld->hwq_recv);
+./ctrl.c:		vqid = hil_vqueue_push_back(&ld->hwq_recv);
+./ctrl.c:		vqid = hil_vqueue_pop_front(&ld->swq_recv_free);
+./ctrl.c:		vqid = hil_vqueue_front(&ld->hwq_recv);
+./ctrl.c:		vqid = hil_vqueue_push_back(&ld->swq_recv_ready);
+./ctrl.c:		vqid = hil_vqueue_pop_front(&ld->hwq_recv);
+./ctrl.c:	return hil_vqueue_count(&ld->swq_recv_ready);
+./ctrl.c:	vqid = hil_vqueue_front(&ld->swq_recv_ready);
+./ctrl.c:	rdyid = hil_vqueue_front(&ld->swq_recv_ready);
+./ctrl.c:		hieth_error("curfd=%p, ld->swq_recv_ready[%d]=%p", curfd, rdyid, cmpfd);
+./ctrl.c:	if(hil_vqueue_push_back(&ld->swq_recv_blank) <0)
+./ctrl.c:	        tmp = hil_vqueue_pop_front(&ld->swq_recv_ready);
+./ctrl.c:	if(hil_vqueue_pop_front(&ld->swq_recv_blank) <0)
+./ctrl.c:	freeid = hil_vqueue_push_back(&ld->swq_recv_free);
+./ctrl.c:        tmp = hil_vqueue_pop_front(&ld->swq_recv_ready);
+./ctrl.c:	hieth_assert(hil_vqueue_count(&ld->swq_recv_blank)==0 ? freeid ==rdyid : freeid !=rdyid);
+./ctrl.c:		freeid = hil_vqueue_push_back(&ld->swq_recv_free);
+./ctrl.c:	int res = ld->depth.sw_recv_rbf;
+./ctrl.c:	res -= hil_vqueue_count(&ld->swq_recv_ready);
+./ctrl.c:	res -= hil_vqueue_count(&ld->swq_recv_free);
+./ctrl.c:	res -= hil_vqueue_count(&ld->hwq_recv);
+./ctrl.c:	if(hil_vqueue_count(&ld->swq_recv_blank) ==0) {
+./ctrl.c:		vqid = hil_vqueue_push_front(&ld->swq_recv_free);
+./ctrl.c:		vqid = hil_vqueue_pop_front(&ld->swq_recv_blank);
+./ctrl.c:		vqid = hil_vqueue_push_back(&ld->swq_recv_free);
+./ctrl.c:	vqid = hil_vqueue_pop_front(&ld->swq_recv_free);
+./ctrl.c:	if(hil_vqueue_push_back(&ld->swq_recv_blank) <0) {
+./ctrl.c:	vqid = hil_vqueue_pop_front(&ld->swq_recv_free);
+./ctrl.c:		vqid = hil_vqueue_pop_front(&ld->swq_recv_ready);
+./ctrl.c:			hil_vqueue_push_back(&ld->swq_recv_blank);
+./ctrl.c:		vqid = hil_vqueue_pop_front(&ld->hwq_recv);
+./ctrl.h:		hieth_assert(!hil_vqueue_iscut(&ld->swq_recv_blank, &ld->swq_recv_ready)); \
+./ctrl.h:		hieth_assert(!hil_vqueue_iscut(&ld->swq_recv_blank, &ld->swq_recv_free)); \
+./ctrl.h:		hieth_assert(!hil_vqueue_iscut(&ld->swq_recv_ready, &ld->swq_recv_free)); } while(0)
+Binary file ./ctrl.o matches
+Binary file ./hiether.o matches
+./mii-drv.c:	ld->iobase = IO_ADDRESS(res->start);
+./mii-drv.c:	ld->iobase_phys = res->start;
+./mii-drv.c:	ld->mdio_frqdiv = 1;
+./mm.c:	ld->swq_recv_fd = vmalloc(sizeof(struct hieth_frame_desc) *
+./mm.c:					(ld->depth.sw_recv_rbf+ld->depth.sw_xmit_pool));
+./mm.c:	ld->swq_xmit_poolfd = ld->swq_recv_fd + ld->depth.sw_recv_rbf;
+./mm.c:	switch(ld->opt.recv_mb_type) {
+./mm.c:			hieth_create_hwq_recv(dev, 0, ld->depth.sw_recv_rbf, MBTYPE_KMEM_CACHE);
+./mm.c:			hieth_create_hwq_recv(dev, 0, ld->depth.sw_recv_rbf, MBTYPE_SKBBUF);
+./mm.c:			hieth_trace(5, "unsupport ld->opt.recv_mb_type=%d", ld->opt.recv_mb_type);
+./mm.c:	hieth_create_hwq_xmit(dev, 0, ld->depth.sw_xmit_pool, MBTYPE_KMEM_CACHE);
+./mm.c:	vfree(ld->swq_recv_fd);
+./net-drv.c:	hieth_recvq_skb_feed(dev, ld->depth.sw_recv_rbf, GFP_KERNEL);
+./net-drv.c:	ld->stat.skb_feeding = 0;
+./net-drv.c:	if(ld->stat.skb_feeding)
+./net-drv.c:	if(hieth_recvq_free_count(ld) > ld->stat.cnt_free_limit)
+./net-drv.c:	if(!list_empty(&ld->wks_skbfeed.entry))
+./net-drv.c:	ld->stat.skb_feeding = 1;
+./net-drv.c:	INIT_WORK(&ld->wks_skbfeed, wksproc_recvq_skb_feed);
+./net-drv.c:	return queue_work(hieth_wq, &ld->wks_skbfeed);
+./net-drv.c:	stat |= (ld->phy->link) ? HIETH_LINKED : 0;
+./net-drv.c:	stat |= (ld->phy->duplex==DUPLEX_FULL) ? HIETH_DUP_FULL : 0;
+./net-drv.c:	stat |= (ld->phy->speed == SPEED_100) ? HIETH_SPD_100M : 0;
+./net-drv.c:	if(stat != ld->link_stat) {
+./net-drv.c:		phy_print_status(ld->phy);
+./net-drv.c:		ld->link_stat = stat;
+./net-drv.c:	ld->stats.rx_packets++;
+./net-drv.c:	ld->stats.rx_bytes += skb->len;
+./net-drv.c:	ld->stats.rx_packets++;
+./net-drv.c:	ld->stats.rx_bytes += skb->len;
+./net-drv.c:		if (!test_and_set_bit(TASKLET_STATE_SCHED, &ld->bf_recv.state)) { \
+./net-drv.c:			ld->timer.netif_rx_busy.function = hieth_bfproc_recv; \
+./net-drv.c:			ld->timer.netif_rx_busy.data = data; \
+./net-drv.c:			ld->timer.netif_rx_busy.expires = jiffies + msecs_to_jiffies(50); \
+./net-drv.c:			add_timer(&ld->timer.netif_rx_busy); \
+./net-drv.c:			ld->stats.rx_errors ++;
+./net-drv.c:			ld->stats.rx_length_errors ++;
+./net-drv.c:					ld->stats.rx_errors ++;
+./net-drv.c:					ld->stats.rx_fifo_errors ++;
+./net-drv.c:					ld->stats.rx_errors ++;
+./net-drv.c:					ld->stats.rx_fifo_errors ++;
+./net-drv.c:		if(!timer_pending(&ld->timer.netif_rx_busy))
+./net-drv.c:			tasklet_schedule(&ld->bf_recv);
+./net-drv.c:	ld->bf_recv.next = NULL;
+./net-drv.c:	ld->bf_recv.state = 0;
+./net-drv.c:	ld->bf_recv.func = hieth_bfproc_recv;
+./net-drv.c:	ld->bf_recv.data = (unsigned long)dev;
+./net-drv.c:	atomic_set(&ld->bf_recv.count, 0);
+./net-drv.c:	hieth_hw_flowctrl(ld, 1, ld->depth.hw_recvq*2/3, ld->depth.hw_recvq/3);
+./net-drv.c:	ld->link_stat = 0;
+./net-drv.c:	phy_start(ld->phy);
+./net-drv.c:	INIT_WORK(&ld->wks_skbfeed, NULL);
+./net-drv.c:	hieth_sys_shutdown(ld->devid);
+./net-drv.c:	phy_stop(ld->phy);
+./net-drv.c:	hieth_sys_shutdown(ld->devid);
+./net-drv.c:				ld->stats.tx_errors++;
+./net-drv.c:				ld->stats.tx_fifo_errors++;
+./net-drv.c:		ld->stats.tx_errors++;
+./net-drv.c:		ld->stats.tx_fifo_errors++;
+./net-drv.c:		ld->stats.tx_errors++;
+./net-drv.c:		ld->stats.tx_fifo_errors++;
+./net-drv.c:		ld->stats.tx_dropped++;
+./net-drv.c:	ld->stats.tx_packets++;
+./net-drv.c:	ld->stats.tx_bytes += skb->len;
+./net-drv.c:	if(ld->opt.xmit_force_copy) {
+./net-drv.c:	return &ld->stats;
+./net-drv.c:        if (!ld->phy) return -EINVAL; // PHY not controllable
+./net-drv.c:        return phy_mii_ioctl(ld->phy, if_mii(rq), cmd);
+./net-drv.c:	return ld->link_stat;
+./net-drv.c:	if (ld->phy)
+./net-drv.c:		return phy_ethtool_gset(ld->phy, cmd);
+./net-drv.c:	if (ld->phy)
+./net-drv.c:		return phy_ethtool_sset(ld->phy, cmd);
+./net-drv.c:	ld->pdev = pdev;
+./net-drv.c:	ld->ndev = netdev;
+./net-drv.c:	ld->iobase = IO_ADDRESS(iores->start);
+./net-drv.c:	ld->iobase_phys = iores->start;
+./net-drv.c:	ld->irq = irqres->start;
+./net-drv.c:	printk(KERN_INFO "ld->iobase:%x,ld->iobase_phys:%x, ld->irq:%x.\n",
+./net-drv.c:			ld->iobase, ld->iobase_phys, ld->irq);		
+./net-drv.c:	netdev->irq = ld->irq;
+./net-drv.c:	ld->depth.hw_xmitq = hieth_hwq_xmit_depth;
+./net-drv.c:	ld->depth.hw_recvq = hieth_hwq_recv_depth;
+./net-drv.c:	ld->depth.sw_xmit_pool = ld->depth.hw_xmitq+1;
+./net-drv.c:	ld->depth.sw_recv_rbf = hieth_recv_rbf_size;
+./net-drv.c:	ld->opt.xmit_force_copy	= 1;
+./net-drv.c:	ld->opt.recv_force_copy	= 0;
+./net-drv.c:	ld->opt.recv_mb_type	= hieth_recv_mb_type;
+./net-drv.c:	ld->stat.cnt_free_limit = hieth_recv_pool_free_limit;
+./net-drv.c:	ld->phy_name = "0:01";
+./net-drv.c:	ld->hclk = 135*MHZ;
+./net-drv.c:	init_timer(&ld->timer.netif_rx_busy);
+./net-drv.c:		printk(KERN_INFO " hw_xmitq_depth: %d\n", ld->depth.hw_xmitq);
+./net-drv.c:		printk(KERN_INFO " hw_recvq_depth: %d\n", ld->depth.hw_recvq);
+./net-drv.c:		printk(KERN_INFO "  sw_xmitq_pool: %d\n", ld->depth.sw_xmit_pool);
+./net-drv.c:		printk(KERN_INFO "  sw_recvq_pool: %d\n", ld->depth.sw_recv_rbf);
+./net-drv.c:		printk(KERN_INFO "free_feed_limit: %d\n", ld->stat.cnt_free_limit);
+./net-drv.c:		printk(KERN_INFO "xmit_force_copy: %s\n", ld->opt.xmit_force_copy?"Yes":"No");
+./net-drv.c:		printk(KERN_INFO "recv_force_copy: %s\n", ld->opt.recv_force_copy?"Yes":"No");
+./net-drv.c:		printk(KERN_INFO "   recv_mb_type: %d\n", ld->opt.recv_mb_type);
+./net-drv.c:	phydev = phy_connect(netdev, ld->phy_name, hieth_adjust_link, 0, PHY_INTERFACE_MODE_MII);
+./net-drv.c:		hieth_error("connect to phy_device %s failed!", ld->phy_name);
+./net-drv.c:	ld->phy = phydev;
+./net-drv.c:	hieth_sys_shutdown(ld->devid);
+./net-drv.c:	phy_disconnect(ld->phy);
+Binary file ./net-drv.o matches
+./net-drv-orig.c:	hieth_recvq_skb_feed(dev, ld->depth.sw_recv_rbf, GFP_KERNEL);
+./net-drv-orig.c:	ld->stat.skb_feeding = 0;
+./net-drv-orig.c:	if(ld->stat.skb_feeding)
+./net-drv-orig.c:	if(hieth_recvq_free_count(ld) > ld->stat.cnt_free_limit)
+./net-drv-orig.c:	if(!list_empty(&ld->wks_skbfeed.entry))
+./net-drv-orig.c:	ld->stat.skb_feeding = 1;
+./net-drv-orig.c:	INIT_WORK(&ld->wks_skbfeed, wksproc_recvq_skb_feed);
+./net-drv-orig.c:	return queue_work(hieth_wq, &ld->wks_skbfeed);
+./net-drv-orig.c:	stat |= (ld->phy->link) ? HIETH_LINKED : 0;
+./net-drv-orig.c:	stat |= (ld->phy->duplex==DUPLEX_FULL) ? HIETH_DUP_FULL : 0;
+./net-drv-orig.c:	stat |= (ld->phy->speed == SPEED_100) ? HIETH_SPD_100M : 0;
+./net-drv-orig.c:	if(stat != ld->link_stat) {
+./net-drv-orig.c:		phy_print_status(ld->phy);
+./net-drv-orig.c:		ld->link_stat = stat;
+./net-drv-orig.c:	ld->stats.rx_packets++;
+./net-drv-orig.c:	ld->stats.rx_bytes += skb->len;
+./net-drv-orig.c:	ld->stats.rx_packets++;
+./net-drv-orig.c:	ld->stats.rx_bytes += skb->len;
+./net-drv-orig.c:		if (!test_and_set_bit(TASKLET_STATE_SCHED, &ld->bf_recv.state)) { \
+./net-drv-orig.c:			ld->timer.netif_rx_busy.function = hieth_bfproc_recv; \
+./net-drv-orig.c:			ld->timer.netif_rx_busy.data = data; \
+./net-drv-orig.c:			ld->timer.netif_rx_busy.expires = jiffies + msecs_to_jiffies(50); \
+./net-drv-orig.c:			add_timer(&ld->timer.netif_rx_busy); \
+./net-drv-orig.c:			ld->stats.rx_errors ++;
+./net-drv-orig.c:			ld->stats.rx_length_errors ++;
+./net-drv-orig.c:					ld->stats.rx_errors ++;
+./net-drv-orig.c:					ld->stats.rx_fifo_errors ++;
+./net-drv-orig.c:					ld->stats.rx_errors ++;
+./net-drv-orig.c:					ld->stats.rx_fifo_errors ++;
+./net-drv-orig.c:		if(!timer_pending(&ld->timer.netif_rx_busy))
+./net-drv-orig.c:			tasklet_schedule(&ld->bf_recv);
+./net-drv-orig.c:	ld->bf_recv.next = NULL;
+./net-drv-orig.c:	ld->bf_recv.state = 0;
+./net-drv-orig.c:	ld->bf_recv.func = hieth_bfproc_recv;
+./net-drv-orig.c:	ld->bf_recv.data = (unsigned long)dev;
+./net-drv-orig.c:	atomic_set(&ld->bf_recv.count, 0);
+./net-drv-orig.c:	hieth_hw_flowctrl(ld, 1, ld->depth.hw_recvq*2/3, ld->depth.hw_recvq/3);
+./net-drv-orig.c:	ld->link_stat = 0;
+./net-drv-orig.c:	phy_start(ld->phy);
+./net-drv-orig.c:	INIT_WORK(&ld->wks_skbfeed, NULL);
+./net-drv-orig.c:	hieth_sys_shutdown(ld->devid);
+./net-drv-orig.c:	phy_stop(ld->phy);
+./net-drv-orig.c:	hieth_sys_shutdown(ld->devid);
+./net-drv-orig.c:				ld->stats.tx_errors++;
+./net-drv-orig.c:				ld->stats.tx_fifo_errors++;
+./net-drv-orig.c:		ld->stats.tx_errors++;
+./net-drv-orig.c:		ld->stats.tx_fifo_errors++;
+./net-drv-orig.c:		ld->stats.tx_errors++;
+./net-drv-orig.c:		ld->stats.tx_fifo_errors++;
+./net-drv-orig.c:		ld->stats.tx_dropped++;
+./net-drv-orig.c:	ld->stats.tx_packets++;
+./net-drv-orig.c:	ld->stats.tx_bytes += skb->len;
+./net-drv-orig.c:	if(ld->opt.xmit_force_copy) {
+./net-drv-orig.c:	return &ld->stats;
+./net-drv-orig.c:        if (!ld->phy) return -EINVAL; // PHY not controllable
+./net-drv-orig.c:        return phy_mii_ioctl(ld->phy, if_mii(rq), cmd);
+./net-drv-orig.c:	return ld->link_stat;
+./net-drv-orig.c:	if (ld->phy)
+./net-drv-orig.c:		return phy_ethtool_gset(ld->phy, cmd);
+./net-drv-orig.c:	if (ld->phy)
+./net-drv-orig.c:		return phy_ethtool_sset(ld->phy, cmd);
+./net-drv-orig.c:	ld->iobase = IO_ADDRESS(iores->start);
+./net-drv-orig.c:	ld->iobase_phys = iores->start;
+./net-drv-orig.c:	ld->irq = irqres->start;
+./net-drv-orig.c:	netdev->irq = ld->irq;
+./net-drv-orig.c:	ld->depth.hw_xmitq = hieth_hwq_xmit_depth;
+./net-drv-orig.c:	ld->depth.hw_recvq = hieth_hwq_recv_depth;
+./net-drv-orig.c:	ld->depth.sw_xmit_pool = ld->depth.hw_xmitq+1;
+./net-drv-orig.c:	ld->depth.sw_recv_rbf = hieth_recv_rbf_size;
+./net-drv-orig.c:	ld->opt.xmit_force_copy	= 1;
+./net-drv-orig.c:	ld->opt.recv_force_copy	= 0;
+./net-drv-orig.c:	ld->opt.recv_mb_type	= hieth_recv_mb_type;
+./net-drv-orig.c:	ld->stat.cnt_free_limit = hieth_recv_pool_free_limit;
+./net-drv-orig.c:	ld->phy_name = "0:01";
+./net-drv-orig.c:	ld->hclk = 135*MHZ;
+./net-drv-orig.c:	init_timer(&ld->timer.netif_rx_busy);
+./net-drv-orig.c:		printk(KERN_INFO " hw_xmitq_depth: %d\n", ld->depth.hw_xmitq);
+./net-drv-orig.c:		printk(KERN_INFO " hw_recvq_depth: %d\n", ld->depth.hw_recvq);
+./net-drv-orig.c:		printk(KERN_INFO "  sw_xmitq_pool: %d\n", ld->depth.sw_xmit_pool);
+./net-drv-orig.c:		printk(KERN_INFO "  sw_recvq_pool: %d\n", ld->depth.sw_recv_rbf);
+./net-drv-orig.c:		printk(KERN_INFO "free_feed_limit: %d\n", ld->stat.cnt_free_limit);
+./net-drv-orig.c:		printk(KERN_INFO "xmit_force_copy: %s\n", ld->opt.xmit_force_copy?"Yes":"No");
+./net-drv-orig.c:		printk(KERN_INFO "recv_force_copy: %s\n", ld->opt.recv_force_copy?"Yes":"No");
+./net-drv-orig.c:		printk(KERN_INFO "   recv_mb_type: %d\n", ld->opt.recv_mb_type);
+./net-drv-orig.c:	phydev = phy_connect(netdev, ld->phy_name, hieth_adjust_link, 0, PHY_INTERFACE_MODE_MII);
+./net-drv-orig.c:		hieth_error("connect to phy_device %s failed!", ld->phy_name);
+./net-drv-orig.c:	ld->phy = phydev;
+./net-drv-orig.c:	hieth_sys_shutdown(ld->devid);
+./net-drv-orig.c:	phy_disconnect(ld->phy);
